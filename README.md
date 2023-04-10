@@ -2,7 +2,7 @@
 
 ---
 
-`composer require HuangChun/api-transform`
+`composer require HuangChun/transform-api`
 
 `php artisan vendor:publish --provider="HuangChun\ApiTransform\TransformServiceProvider"`
 
