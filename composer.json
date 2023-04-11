@@ -2,6 +2,15 @@
     "name": "huang_chun/transform-api",
     "description": "For APi Transform",
     "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "HuangChun\\TransformApi\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
     "require": {
         "php": "^8.0",
         "symfony/http-foundation": "^5.0|^6.0",
@@ -12,15 +21,6 @@
         "orchestra/testbench": "^5.0|^6.0|^7.0",
         "phpunit/phpunit": "^9.3",
         "symfony/var-dumper": "^6.0"
-    },
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "HuangChun\\TransformApi\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
     },
     "extra": {
         "laravel": {
