@@ -4,5 +4,5 @@
 
 `composer require HuangChun/transform-api`
 
-`php artisan vendor:publish --provider="HuangChun\ApiTransform\TransformServiceProvider"`
+`php artisan vendor:publish --provider="HuangChun\TransformApi\TransformServiceProvider"`
 

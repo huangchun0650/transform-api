@@ -1,14 +1,12 @@
 <?php
 
-
 namespace Data;
 
-
+use HuangChun\TransformApi\Exceptions\OnlyOneFalseKey;
+use HuangChun\TransformApi\Exceptions\OnlyOnePaginatorData;
+use HuangChun\TransformApi\Resources;
+use HuangChun\TransformApi\Transform;
 use Illuminate\Pagination\LengthAwarePaginator;
-use HuangChun\ApiTransform\Exceptions\OnlyOneFalseKey;
-use HuangChun\ApiTransform\Exceptions\OnlyOnePaginatorData;
-use HuangChun\ApiTransform\Resources;
-use HuangChun\ApiTransform\Transform;
 
 class FailDataProvider extends DataProvider
 {
@@ -16,15 +14,15 @@ class FailDataProvider extends DataProvider
     {
         [$firstKey, $secondKey] = $this->keyNames;
         return [
-            __FUNCTION__ => [
+            __FUNCTION__=> [
                 [$firstKey => false, $secondKey => false],
                 [$firstKey => 'test', $secondKey => 'test'],
                 [
                     fn(Transform $transform, Resources $resources) => [],
-                    fn(Transform $transform, Resources $resources) => []
+                    fn(Transform $transform, Resources $resources) => [],
                 ],
-                OnlyOneFalseKey::class
-            ]
+                OnlyOneFalseKey::class,
+            ],
         ];
     }
 
@@ -32,7 +30,7 @@ class FailDataProvider extends DataProvider
     {
         [$firstKey, $secondKey] = $this->keyNames;
         return [
-            __FUNCTION__ => [
+            __FUNCTION__=> [
                 [$firstKey => $firstKey, $secondKey => $secondKey],
                 [
                     $firstKey => new LengthAwarePaginator(['test'], 3, 2),
@@ -40,10 +38,10 @@ class FailDataProvider extends DataProvider
                 ],
                 [
                     fn(Transform $transform, Resources $resources) => [],
-                    fn(Transform $transform, Resources $resources) => []
+                    fn(Transform $transform, Resources $resources) => [],
                 ],
-                OnlyOnePaginatorData::class
-            ]
+                OnlyOnePaginatorData::class,
+            ],
         ];
     }
 }

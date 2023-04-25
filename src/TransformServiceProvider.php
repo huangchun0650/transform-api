@@ -1,11 +1,8 @@
 <?php
 
+namespace HuangChun\TransformApi;
 
-namespace HuangChun\ApiTransform;
-
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
-
 
 class TransformServiceProvider extends ServiceProvider
 {
@@ -18,20 +15,20 @@ class TransformServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/api-transform.php',
+            __DIR__ . '/../config/api-transform.php',
             'api-transform'
         );
     }
 
     protected function offerPublishing()
     {
-        if (! function_exists('config_path')) {
+        if (!function_exists('config_path')) {
             // function not available and 'publish' not relevant in Lumen
             return;
         }
 
         $this->publishes([
-            __DIR__.'/../config/api-transform.php' => config_path('api-transform.php'),
+            __DIR__ . '/../config/api-transform.php' => config_path('api-transform.php'),
         ], 'config');
 
     }

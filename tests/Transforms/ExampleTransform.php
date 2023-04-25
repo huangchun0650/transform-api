@@ -1,12 +1,9 @@
 <?php
 
-
 namespace Transforms;
 
-
 use Contracts\TestTransform;
-use HuangChun\ApiTransform\Resources;
-use HuangChun\ApiTransform\Transform;
+use HuangChun\TransformApi\Transform;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\MockObject\BadMethodCallException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,7 +12,7 @@ class ExampleTransform extends Transform implements TestTransform
 {
     public array $methodOutputKey = [];
 
-    private static array $keyNames = [
+    private static array  $keyNames = [
         'firstKey',
         'secondKey',
     ];

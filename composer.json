@@ -25,7 +25,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "HuangChun\\ApiTransform\\TransformServiceProvider"
+                "HuangChun\\TransformApi\\TransformServiceProvider"
             ]
         }
     },

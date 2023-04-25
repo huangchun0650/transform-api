@@ -1,7 +1,7 @@
 <?php
 
+use HuangChun\TransformApi\TransformServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use HuangChun\ApiTransform\TransformServiceProvider;
 
 abstract class TestCase extends Orchestra
 {

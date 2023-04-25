@@ -1,6 +1,6 @@
 <?php
 
-namespace HuangChun\ApiTransform\Commands;
+namespace HuangChun\TransformApi\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -29,8 +29,8 @@ class TransformMakeCommand extends GeneratorCommand
     protected function getStub()
     {
         return $this->option('example') ?
-            $this->resolveStubPath('/stubs/example-transform.stub') :
-            $this->resolveStubPath('/stubs/transform.stub');
+        $this->resolveStubPath('/stubs/example-transform.stub') :
+        $this->resolveStubPath('/stubs/transform.stub');
     }
 
     /**
@@ -42,8 +42,8 @@ class TransformMakeCommand extends GeneratorCommand
     protected function resolveStubPath($stub)
     {
         return file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))
-            ? $customPath
-            : __DIR__ . $stub;
+        ? $customPath
+        : __DIR__ . $stub;
     }
 
     /**

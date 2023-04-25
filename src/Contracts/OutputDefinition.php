@@ -1,8 +1,6 @@
 <?php
 
-
-namespace HuangChun\ApiTransform\Contracts;
-
+namespace HuangChun\TransformApi\Contracts;
 
 interface OutputDefinition
 {

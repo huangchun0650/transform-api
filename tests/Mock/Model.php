@@ -1,11 +1,11 @@
 <?php
 
-
 namespace Mock;
 
-use HuangChun\ApiTransform\Resources;
+use HuangChun\TransformApi\Resources;
 
 class Model extends Resources implements \IteratorAggregate
+
 {
     public function get(): mixed
     {

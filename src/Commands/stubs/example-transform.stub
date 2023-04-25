@@ -2,8 +2,8 @@
 
 namespace {{ namespace }};
 
-use HuangChun\ApiTransform\Transform;
-use HuangChun\ApiTransform\Resources;
+use HuangChun\TransformApi\Transform;
+use HuangChun\TransformApi\Resources;
 
 class {{ class }} extends Transform
 {

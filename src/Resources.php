@@ -1,8 +1,6 @@
 <?php
 
-
-namespace HuangChun\ApiTransform;
-
+namespace HuangChun\TransformApi;
 
 use ArrayAccess;
 use Illuminate\Pagination\AbstractPaginator;
@@ -57,12 +55,12 @@ class Resources implements ArrayAccess, JsonSerializable
      * @param \Closure $callback
      * @return mixed
      */
-    public function mapUnit($resource, \Closure $callback): mixed
+    public function mapUnit($resource, \Closure$callback): mixed
     {
         if ($resource instanceof Collection || $resource instanceof AbstractPaginator) {
-            return $resource->map(fn ($data) => $callback($data))->toArray();
+            return $resource->map(fn($data) => $callback($data))->toArray();
         } else if (is_numeric_list($resource)) {
-            return collect($resource)->map(fn ($data) => $callback($data))->toArray();
+            return collect($resource)->map(fn($data) => $callback($data))->toArray();
         } else {
             return $callback($resource);
         }
@@ -73,7 +71,9 @@ class Resources implements ArrayAccess, JsonSerializable
      */
     public function mapExecClosure(): static
     {
-        if (!is_array($this->resources)) return $this;
+        if (!is_array($this->resources)) {
+            return $this;
+        }
 
         $lastKey = $this->getRefLastKey($this->resources);
 
@@ -95,7 +95,7 @@ class Resources implements ArrayAccess, JsonSerializable
      * @param $resource
      * @return int|string|null
      */
-    private function getRefLastKey($resource): int|string|null
+    private function getRefLastKey($resource): int | string | null
     {
         end($resource);
         return key($resource);

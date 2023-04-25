@@ -1,9 +1,8 @@
 <?php
 
 use Contracts\TestTransform;
-use Data\SuccessDataProvider;
-use HuangChun\ApiTransform\Exceptions\OnlyOneFalseKey;
 use Data\FailDataProvider;
+use Data\SuccessDataProvider;
 
 class ResponseTest extends BaseTest
 {

@@ -1,8 +1,6 @@
 <?php
 
-
-namespace HuangChun\ApiTransform;
-
+namespace HuangChun\TransformApi;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
