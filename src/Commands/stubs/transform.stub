@@ -7,8 +7,8 @@ use HuangChun\TransformApi\Resources;
 
 class {{ class }} extends Transform
 {
-    public function methodOutputKey(): array
+    public function default(Resources $resource): array
     {
-        // TODO: Implement methodOutputKey() method.
+        // TODO: Implement default() method.
     }
 }

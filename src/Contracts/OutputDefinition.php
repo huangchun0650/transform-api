@@ -2,12 +2,9 @@
 
 namespace HuangChun\TransformApi\Contracts;
 
+use HuangChun\TransformApi\Resources;
+
 interface OutputDefinition
 {
-    /**
-     * defined Array [ resource key name => transform key name (enter false ignores key)]
-     *
-     * @return array
-     */
-    public function methodOutputKey(): array;
+    public function default(Resources $resource): array;
 }

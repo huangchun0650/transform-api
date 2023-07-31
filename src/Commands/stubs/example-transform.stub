@@ -7,19 +7,11 @@ use HuangChun\TransformApi\Resources;
 
 class {{ class }} extends Transform
 {
-    public function methodOutputKey(): array
+    public function default(Resources $resource) :array
     {
         return [
-            'user' => false
-        ];
-    }
-
-    public function __user(Resources $resource)
-    {
-        return [
-            'account'  => $resource->account,
-            'name'     => $resource->name,
-            'birthday' => $resource->birthday,
+            'id'   => $resource->id,
+            'name' => $resource->name,
         ];
     }
 }
