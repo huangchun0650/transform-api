@@ -4,6 +4,7 @@ namespace HuangChun\TransformApi;
 
 use HuangChun\TransformApi\Contracts\OutputDefinition;
 use HuangChun\TransformApi\Resources;
+use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -14,6 +15,9 @@ abstract class Transform implements OutputDefinition
 
     /** @var Resources $transform */
     protected Resources $transform;
+
+    /** @var bool $withPaginationOutput */
+    protected bool $withPaginationOutput = true;
 
     /** @var mixed|\Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application  */
     protected mixed $config;
@@ -70,7 +74,9 @@ abstract class Transform implements OutputDefinition
      */
     public function when(bool $bool, \Closure $action): mixed
     {
-        if (!$bool) return fn(Resources $resources, $key) => $resources->offsetUnset($key);
+        if (!$bool) {
+            return fn(Resources $resources, $key) => $resources->offsetUnset($key);
+        }
 
         return $action();
     }
@@ -89,6 +95,8 @@ abstract class Transform implements OutputDefinition
     protected function toTransform(): static
     {
         $this->eachResource(function (Resources $resources, $data, $key) {
+            $this->withPaginationOutput && $resources->get() instanceof AbstractPaginator ?
+            $this->packOutputKeyWithPagination($key, $data, $resources->get()) :
             $this->packOutputKey($key, $data);
         });
 
@@ -121,8 +129,8 @@ abstract class Transform implements OutputDefinition
     private function packOutputKey($key, $data): static
     {
         $key === false ?
-            $this->transform->offsetSet(self::VIRTUAL_PACK, $data) :
-            $this->transform->deepSet($data, self::VIRTUAL_PACK . ".{$key}");
+        $this->transform->offsetSet(self::VIRTUAL_PACK, $data) :
+        $this->transform->deepSet($data, self::VIRTUAL_PACK . ".{$key}");
 
         return $this;
     }
@@ -162,5 +170,27 @@ abstract class Transform implements OutputDefinition
         $packKey = false;
 
         $callback($resource, $data, $packKey);
+    }
+
+    /**
+     * @param $key
+     * @param $data
+     * @param AbstractPaginator $paginator
+     * @return $this
+     */
+    private function packOutputKeyWithPagination($key, $data, AbstractPaginator $paginator): static
+    {
+        $this->transform->deepSet($data, $key === false ? self::VIRTUAL_PACK : self::VIRTUAL_PACK . ".{$key}");
+
+        $paginationInfo = $this->config['pagination_info'];
+
+        $this->transform->deepSet([
+            $paginationInfo['current_page'] => $paginator->currentPage(),
+            $paginationInfo['last_page'] => $paginator->lastPage(),
+            $paginationInfo['per_page'] => $paginator->perPage(),
+            $paginationInfo['total'] => $paginator->total(),
+        ], $key === false ? $this->config['pagination_pack'] : "{$this->config['pagination_pack']}.{$key}");
+
+        return $this;
     }
 }
