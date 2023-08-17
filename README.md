@@ -6,3 +6,5 @@
 
 `php artisan vendor:publish --provider="HuangChun\TransformApi\TransformServiceProvider"`
 
+## 更新 支援 Laravel 10
+
